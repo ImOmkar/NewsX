@@ -1,0 +1,296 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+      body{
+        background-color: #131218;
+        font-family: 'Montserrat', sans-serif;
+      }
+      .dropdown-menu {
+        max-height:300px;
+          overflow-y: scroll;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'img/logo.png' %}" width="50" height="50" class="d-inline-block" alt="">
+        NewsX
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}">⛳Country-wise top headlines<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0" method="POST">
+          {% csrf_token %}
+          <input class="form-control mr-sm-2" type="text" name="search" placeholder="e.g. corona, china, wuhan" aria-label="Search" required>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="search">Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+      <div class="container">
+
+        <!-- Page Heading -->
+        <h2 class="my-4 text-light text-center">🔥Top Headlines🔥
+          <hr style="border: 10px solid #d21e1e;width: 10%;">
+        </h2>
+
+        <!--tabbed panel-->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="bbc-tab" data-toggle="tab" href="#bbc" role="tab" aria-controls="bbc" aria-selected="true">BBC</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="verge-tab" data-toggle="tab" href="#verge" role="tab" aria-controls="verge" aria-selected="false">The Verge</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="jazeera-tab" data-toggle="tab" href="#jazeera" role="tab" aria-controls="jazeera" aria-selected="false">al-jazeera</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="cnbc-tab" data-toggle="tab" href="#cnbc" role="tab" aria-controls="cnbc" aria-selected="false">CNBC</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="cnn-tab" data-toggle="tab" href="#cnn" role="tab" aria-controls="cnn" aria-selected="false">CNN</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="crypt-tab" data-toggle="tab" href="#crypt" role="tab" aria-controls="crypt" aria-selected="false">Crypto-Coins-News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="espn-tab" data-toggle="tab" href="#espn" role="tab" aria-controls="espn" aria-selected="false">ESPN</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="espn_cric-tab" data-toggle="tab" href="#espn_cric" role="tab" aria-controls="espn_cric" aria-selected="false">ESPN-Cricket</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="financial_post-tab" data-toggle="tab" href="#financial_post" role="tab" aria-controls="financial_post" aria-selected="false">Financial Post</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="bbc" role="tabpanel" aria-labelledby="bbc-tab">
+            <div class="row">
+              {% for u, p, new, des, i in mylist %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                    <p class="card-text"><small class="text-muted">Published at - {{ p }}</small></p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="verge" role="tabpanel" aria-labelledby="verge-tab">
+            <div class="row">
+              {% for u, p, new, des, i in vergelist %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href=""><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                    <p class="card-text"><small class="text-muted">Published at - {{ p }}</small></p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="jazeera" role="tabpanel" aria-labelledby="jazeera-tab">
+            <div class="row">
+              {% for u, p, new, des, i in jazeeralist %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href=""><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                    <p class="card-text"><small class="text-muted">Published at - {{ p }}</small></p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="cnbc" role="tabpanel" aria-labelledby="cnbc-tab">
+            <div class="row">
+              {% for u, p, new, des, i in cnbclist %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href=""><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                    <p class="card-text"><small class="text-muted">Published at - {{ p }}</small></p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="cnn" role="tabpanel" aria-labelledby="cnn-tab">
+            <div class="row">
+              {% for u, p, new, des, i in cnnlist %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                    <p class="card-text"><small class="text-muted">Published at - {{ p }}</small></p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="crypt" role="tabpanel" aria-labelledby="crypt-tab">
+            <div class="row">
+              {% for u, p, new, des, i in cryptolist %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                    <p class="card-text"><small class="text-muted">Published at - {{ p }}</small></p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="espn" role="tabpanel" aria-labelledby="espn-tab">
+            <div class="row">
+              {% for u, p, new, des, i in espnlist %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                    <p class="card-text"><small class="text-muted">Published at - {{ p }}</small></p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="espn_cric" role="tabpanel" aria-labelledby="espn_cric-tab">
+            <div class="row">
+              {% for u, p, new, des, i in espncriclist %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                    <p class="card-text"><small class="text-muted">Published at - {{ p }}</small></p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="financial_post" role="tabpanel" aria-labelledby="financial_post-tab">
+            <div class="row">
+              {% for u, p, new, des, i in financial_postlist %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                    <p class="card-text"><small class="text-muted">Published at - {{ p }}</small></p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+        <!--tabbed panel end-->
+
+        <div class="row">
+          {% for new, des, i in mylist %}
+          <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+              <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#">{{ new }}</a>
+                </h4>
+                <p class="card-text">{{ des }}</p>
+              </div>
+            </div>
+          </div>
+            {% endfor %}
+        </div>
+        <!-- /.row -->
+
+        <!-- Pagination -->
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- /.container -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,549 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,400,300,500,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Lobster&display=swap" rel="stylesheet">
+    <style>
+      body{
+        background-color: #131218;
+        font-family: 'Montserrat', sans-serif;
+      }
+        .card
+        {
+            position: relative;
+            -webkit-transition: all 200ms ease-in;
+            -webkit-transform: scale(1);
+            -ms-transition: all 200ms ease-in;
+            -ms-transform: scale(1);
+            -moz-transition: all 200ms ease-in;
+            -moz-transform: scale(1);
+            transition: all 200ms ease-in;
+            transform: scale(1);
+
+        }
+        .card:hover
+        {
+            box-shadow: 0px 0px 150px #000000;
+            z-index: 2;
+            -webkit-transition: all 200ms ease-in;
+            -webkit-transform: scale(1.2);
+            -ms-transition: all 200ms ease-in;
+            -ms-transform: scale(1.2);
+            -moz-transition: all 200ms ease-in;
+            -moz-transform: scale(1.2);
+            transition: all 200ms ease-in;
+            transform: scale(1.2);
+        }
+        @media screen and (min-width : 320px) and (max-width : 767px){
+          .card:hover{
+            box-shadow: 0px 0px 150px #000000;
+            z-index: 2;
+            -webkit-transition: all 200ms ease-in;
+            -webkit-transform: scale(1);
+            -ms-transition: all 200ms ease-in;
+            -ms-transform: scale(1);
+            -moz-transition: all 200ms ease-in;
+            -moz-transform: scale(1);
+            transition: all 200ms ease-in;
+            transform: scale(1);
+          }
+        }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'img/logo.png' %}" width="50" height="50" class="d-inline-block" alt="">
+        NewsX
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active" style="font-family: 'Acme', sans-serif;">
+            <a class="nav-link" href="{% url 'Top_headlines' %}">🔥Top Headlines<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0" style="font-family: 'Acme', sans-serif;" method="POST">
+          {% csrf_token %}
+          <input class="form-control mr-sm-2" type="text" name="search" placeholder="e.g. corona, china, wuhan" aria-label="Search" required>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="search">Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+  <div class="container" style="font-family: 'Acme', sans-serif;">
+
+        <!-- Page Heading -->
+        <h2 class="my-4 text-light text-center">What's happening there...?
+          <br>
+          <small class="my-4 text-light text-center" style="font-size: 20px;">Get country-wise top headlines</small>
+          <hr style="border: 10px solid #d21e1e;width: 10%;">
+          <input class="form-control" id="myFilter" onkeyup="myFunction()" type="text" placeholder="Search your country...">
+        </h2>
+        <!-- /.row -->
+      <div class="row" id="myItems" style="font-family: 'Acme', sans-serif;">
+        <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+          <div class="card">
+           <div class="card-body">
+             <h5 class="card-title text-center"><a href="#">Argentina</a></h5>
+            <a href="{% url 'argentina' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ar.svg" alt="ar"></a>
+          </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+          <div class="card">
+           <div class="card-body">
+             <h5 class="card-title text-center"><a href="">Australia</a></h5>
+            <a href="{% url 'australia' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/au.svg" alt="au"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Austria</a></h5>
+            <a href="{% url 'austria' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/at.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Belgium</a></h5>
+            <a href="{% url 'belgium' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/be.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+        <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+          <div class="card">
+           <div class="card-body">
+             <h5 class="card-title text-center"><a href="#">Brazil</a></h5>
+            <a href="{% url 'brazil' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/br.svg" alt=""></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Bulgaria</a></h5>
+            <a href="{% url 'bulgaria' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/bg.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Canada</a></h5>
+            <a href="{% url 'canada' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ca.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">China</a></h5>
+            <a href="{% url 'china' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/cn.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Colombia</a></h5>
+            <a href="{% url 'colombia' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/co.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+        <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+          <div class="card">
+           <div class="card-body">
+             <h5 class="card-title text-center"><a href="#">Cuba</a></h5>
+            <a href="{% url 'cuba' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/cu.svg" alt=""></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Czech Republic</a></h5>
+            <a href="{% url 'czech' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/cz.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Egypt</a></h5>
+            <a href="{% url 'egypt' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/eg.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">France</a></h5>
+            <a href="{% url 'france' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/fr.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Germany</a></h5>
+            <a href="{% url 'germany' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/de.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+          <div class="card">
+           <div class="card-body">
+             <h5 class="card-title text-center"><a href="#">Greece</a></h5>
+            <a href="{% url 'greece' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/gr.svg" alt=""></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Hong Kong</a></h5>
+            <a href="{% url 'hongkong' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/hk.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Hungary</a></h5>
+            <a href="{% url 'hungary' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/hu.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">India</a></h5>
+            <a href="{% url 'india' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/in.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Indonesia</a></h5>
+            <a href="{% url 'indonesia' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/id.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Ireland</a></h5>
+            <a href="{% url 'ireland' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ie.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Israel</a></h5>
+            <a href="{% url 'israel' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/il.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Italy</a></h5>
+            <a href="{% url 'italy' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/it.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Japan</a></h5>
+            <a href="{% url 'japan' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/jp.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Latvia</a></h5>
+            <a href="{% url 'latvia' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/lv.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Lithuania</a></h5>
+            <a href="{% url 'lithuania' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/lt.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Malaysia</a></h5>
+            <a href="{% url 'malaysia' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/my.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Mexico</a></h5>
+            <a href="{% url 'mexico' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/mx.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Morocco</a></h5>
+            <a href="{% url 'morocco' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ma.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Netherlands</a></h5>
+            <a href="{% url 'netherland' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/nl.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">New Zealand</a></h5>
+            <a href="{% url 'nzealand' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/nz.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Nigeria</a></h5>
+            <a href="{% url 'nigeria' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ng.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Norway</a></h5>
+            <a href="{% url 'norway' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/no.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Philippines</a></h5>
+            <a href="{% url 'philip' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ph.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Poland</a></h5>
+            <a href="{% url 'poland' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/pl.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Portugal</a></h5>
+            <a href="{% url 'portugal' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/pt.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Romania</a></h5>
+            <a href="{% url 'romania' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ro.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Russia</a></h5>
+            <a href="{% url 'russia' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ru.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Saudi Arabia</a></h5>
+            <a href="{% url 'saudi' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/sa.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Serbia</a></h5>
+            <a href="{% url 'serbia' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/rs.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Singapore</a></h5>
+            <a href="{% url 'singapore' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/sg.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Sovakia</a></h5>
+            <a href="{% url 'slovekia' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/sk.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Slovenia</a></h5>
+            <a href="{% url 'slovenia' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/si.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">South Africa</a></h5>
+            <a href="{% url 'safrica' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/za.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">South Korea</a></h5>
+            <a href="{% url 'skorea' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/kr.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Sweden</a></h5>
+            <a href="{% url 'sweden' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/se.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Switzerland</a></h5>
+            <a href="{% url 'switz' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ch.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Taiwan</a></h5>
+            <a href="{% url 'taiwan' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/tw.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Thailand</a></h5>
+            <a href="{% url 'thai' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/th.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Turkey</a></h5>
+            <a href="{% url 'turkey' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/tr.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">UAE</a></h5>
+            <a href="{% url 'uae' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ae.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Ukraine</a></h5>
+            <a href="{% url 'ukraine' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">United Kingdom</a></h5>
+            <a href="{% url 'uk' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">United States</a></h5>
+            <a href="{% url 'us' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/us.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3 mb-3">
+        <div class="card">
+         <div class="card-body">
+           <h5 class="card-title text-center"><a href="#">Venuzuela</a></h5>
+            <a href="{% url 'venuzuela' %}"><img class="card-img-top" src="https://lipis.github.io/flag-icon-css/flags/4x3/ve.svg" alt=""></a>
+         </div>
+       </div>
+      </div>
+    </div>
+  </div>
+      <!-- /.container -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+  function myFunction() {
+    var input, filter, cards, cardContainer, h5, title, i;
+    input = document.getElementById("myFilter");
+    filter = input.value.toUpperCase();
+    cardContainer = document.getElementById("myItems");
+    cards = cardContainer.getElementsByClassName("card");
+    for (i = 0; i < cards.length; i++) {
+      title = cards[i].querySelector(".card-body h5.card-title");
+      if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+        cards[i].style.display = "";
+      } else {
+        cards[i].style.display = "none";
+      }
+    }
+  }
+    </script>
+  </body>
+</html>
