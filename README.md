@@ -1,5 +1,5 @@
 ## NewsX 
-NewsX is build on top of the newsapi. It uses newsapi to fetch top-headlines of different news site. You can search topnews by keyword. You can also get the country-wise top-headlines.
+NewsX is build on top of the newsapi. It uses newsapi to fetch top-headlines of different news sites. You can search topnews by keyword. You can also get the country-wise top-headlines.
 
 ## Installation:
 
