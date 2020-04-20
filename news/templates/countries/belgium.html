@@ -49,21 +49,151 @@
           <hr style="border: 10px solid #d21e1e;width: 10%;">
         </h2>
 
-        <div class="row">
-          {% for u, p, new, des, i in belgium_list %}
-          <div class="col-lg-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="{{ u }}">{{ new }}</a>
-                </h4>
-                <p class="card-text">{{ des }}</p>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">All</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-business-tab" data-toggle="pill" href="#pills-business" role="tab" aria-controls="pills-business" aria-selected="false">Business</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-entertainment-tab" data-toggle="pill" href="#pills-entertainment" role="tab" aria-controls="pills-entertainment" aria-selected="false">Entertainment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-health-tab" data-toggle="pill" href="#pills-health" role="tab" aria-controls="pills-health" aria-selected="false">Health</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-science-tab" data-toggle="pill" href="#pills-science" role="tab" aria-controls="pills-science" aria-selected="false">Science</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-sports-tab" data-toggle="pill" href="#pills-sports" role="tab" aria-controls="pills-sports" aria-selected="false">Sports</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-technology-tab" data-toggle="pill" href="#pills-technology" role="tab" aria-controls="pills-technology" aria-selected="false">Technology</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="row">
+              {% for u, p, new, des, i in belgium_list %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                  </div>
+                </div>
               </div>
+                {% endfor %}
             </div>
           </div>
-            {% endfor %}
+          <div class="tab-pane fade" id="pills-business" role="tabpanel" aria-labelledby="pills-business-tab">
+            <div class="row">
+              {% for u, p, new, des, i in belgium_busi_list %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-entertainment" role="tabpanel" aria-labelledby="pills-entertainment-tab">
+            <div class="row">
+              {% for u, p, new, des, i in belgium_enter_list %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <div class="row">
+              {% for u, p, new, des, i in belgium_health_list %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-science" role="tabpanel" aria-labelledby="pills-science-tab">
+            <div class="row">
+              {% for u, p, new, des, i in belgium_sci_list %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-sports" role="tabpanel" aria-labelledby="pills-sports-tab">
+            <div class="row">
+              {% for u, p, new, des, i in belgium_sport_list %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-technology" role="tabpanel" aria-labelledby="pills-technology-tab">
+            <div class="row">
+              {% for u, p, new, des, i in belgium_tech_list %}
+              <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ i }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="{{ u }}">{{ new }}</a>
+                    </h4>
+                    <p class="card-text">{{ des }}</p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
         </div>
+
         <!-- /.row -->
 
         <!-- Pagination -->
