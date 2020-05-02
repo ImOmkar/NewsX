@@ -23,8 +23,8 @@ NewsX is build on top of the newsapi. It uses newsapi to fetch top-headlines of 
     
     
 ## Installation:
-#### Also available in pypi. github link - (https://github.com/mattlisiv/newsapi-python):
-    pip install newsapi-python
+#### Also available on PyPI site. github link - (https://github.com/mattlisiv/newsapi-python):
+    pip install newsapi-python (with developer account, you can only do 500 request in 24 hours and 250 request in 12 hours)
     
 
 ## How to use:
